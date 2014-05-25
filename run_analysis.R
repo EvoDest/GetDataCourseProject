@@ -8,7 +8,7 @@ featuresDescription <- read.table("UCI HAR Dataset//features.txt")
 # Merge original test and train data
 fullData <- rbind(testData, trainData)
 
-# Set the column names of the merged data as the feature names
+# Set the features as the column names for the merged data
 colnames(fullData) <- featuresDescription[,2]
 
 # Load and store the test activity data
@@ -61,7 +61,7 @@ fullDataMerged <- cbind(fullDataSubjects, fullActivityDescription, fullData)
 #install.packages("reshape2")
 library("reshape2")
 
-# Precess data to get independent data set with the average of each variable for each activity and each subject
+# Process data to get independent data set with the average of each variable for each activity and each subject
 fullDataMergedClean <- melt(fullDataMerged, id=c("SubjectId", "Activity"))
 fullDataMergedTidy <- dcast(fullDataMergedClean, SubjectId+Activity~variable, mean)
 
